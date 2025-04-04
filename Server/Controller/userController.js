@@ -1,7 +1,5 @@
 import Task from "../Model/Task.js";
 import User from "../Model/User.js";
-import bcryptjs from "bcryptjs";
-
 
 export const getUsers = async (req, res) => {
     const users = await User.find({ role: 'member' }).select('-password');
@@ -31,5 +29,3 @@ export const getUserById = async (req, res) => {
         res.status(500).json({message:"Internal server error", error:error});
     }
 }
-
-export const deleteUser = async (req, res) => { }
