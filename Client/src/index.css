@@ -1,20 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=League+Spartan:wght@100..900&display=swap');
 @import 'tailwindcss';
-:root{
-    --font-primary: "Lato", sans-serif;
-    --font-secondary: "Raleway", sans-serif;
+
+@theme{
+  --font-base:'League Spartan', "sans-serif";
 }
-*{
-    margin:0;
-    padding:0;
-    font-family: var(--font-primary);
-}
-.header{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    font-family: var(--font-secondary);
-    width: 80%;
-    height:80px;
-    margin:0 auto;
+
+@layer base{
+  html{
+    font-family: var(--font-base);
+  }
+  body{
+    background-color: #fcfbfc;
+    overflow-x: hidden;
+  }
 }
