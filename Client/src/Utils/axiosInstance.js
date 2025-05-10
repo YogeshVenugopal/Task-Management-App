@@ -11,26 +11,34 @@ const axiosInstance = axios.create({
     },
 });
 
-axiosInstance.interceptors.request.use((config) =>{
-    const accessToken  = localStorage.getItem("accessToken");  
-    if(accessToken){
-        config.headers.Authorization = `Bearer ${accessToken}`;
+
+
+axiosInstance.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
     }
-    return config
-}, (error) => {
-    return Promise.reject(error);
-})
+);
 
+axiosInstance.interceptors.response.use(
+    (response) => {
+        return response;
+    },
+    (error) => {
+        if (error.response && error.response.status === 401) {
+            localStorage.removeItem('token');
+            if (window.location.pathname !== '/login') {
+                window.location.href = '/login';
+            }
+        }
+        return Promise.reject(error);
+    }
+);
 
-
-axiosInstance.interceptors.response.use((response) => response, (error) => {if(error.response.status === 401){
-    window.location.href = "/login";
-}else if(error.response.status === 500){
-    console.error("Server Error, Please try again later")
-}
-else if(error.code === "ECONNABORTED"){
-    console.error("Request Timeout, Please try again later")
-}
-});
-
-export default axiosInstance
+export default axiosInstance;

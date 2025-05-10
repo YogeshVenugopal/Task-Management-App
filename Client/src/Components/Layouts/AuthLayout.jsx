@@ -2,7 +2,7 @@ import React from 'react'
 import loginImage from '../../assets/loginImage.png'
 const AuthLayout = ({ children }) => {
   return (
-    <div className='flex '>
+    <div className='flex'>
         <div className='w-screen h-screen md:w-[60vw] px-12 pt-8 pb-12'>
             <h1 className='md:text-2xl text-lg font-medium text-black'>Task Manager</h1>
             {children}
