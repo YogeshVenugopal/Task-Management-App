@@ -25,7 +25,6 @@ const Register = () => {
   const handleSignUp = async (e) => {
     e.preventDefault()
     
-    // Form validation
     if(!fullName){
       setError("Please enter your full name")
       return
@@ -51,7 +50,6 @@ const Register = () => {
     let profileImageUrl = ""
     
     try {
-      // Handle profile image upload if provided
       if(profilePic){
         setIsUploading(true)
         try {
@@ -67,13 +65,12 @@ const Register = () => {
         }
       }
       
-      // Register user
       const response = await axiosInstance.post(API_PATH.AUTH.REGISTER, {
         name: fullName,
         email,
         password,
         profileImageUrl,
-        adminInviteToken: adminInviteToken || undefined // Only send if it has a value
+        adminInviteToken: adminInviteToken || undefined 
       })
 
       const {token, role} = response.data;
@@ -83,21 +80,18 @@ const Register = () => {
         updateUser(response.data)
       }
 
-      // Handle navigation based on role
       if (role === "admin"){
         navigate("/admin/dashboard")
       } else if (role === "user") {
         navigate("/user/dashboard")
       } else {
-        // Handle unexpected role
         console.warn("Unknown user role:", role)
-        navigate("/") // Redirect to home or another safe page
+        navigate("/") 
       }
 
     } catch (error) {
       console.error("Registration error:", error)
       
-      // Improved error handling
       if(error.response && error.response.data && error.response.data.message){
         setError(error.response.data.message)
       } else {

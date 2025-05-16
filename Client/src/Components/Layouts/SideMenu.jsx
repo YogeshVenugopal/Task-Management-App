@@ -59,7 +59,7 @@ const SideMenu = ({activeMenu}) => {
           :""
           } py-3 px-6 mb-3 cursor-pointer`}
         >
-          <item.icon className=""/>
+          <item.icon className="text-xl "/>
           {item.label}
         </button>
       ))}

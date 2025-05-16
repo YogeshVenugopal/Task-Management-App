@@ -19,7 +19,6 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Form validation
     if (!email || !password) {
       setError("Please fill all the fields")
       return
@@ -51,20 +50,17 @@ const Login = () => {
         updateUser(response.data);
       }
 
-      // Handle navigation based on role
       if(role === "admin"){
         navigate("/admin/dashboard")
       }else if(role === "user"){
         navigate("/user/dashboard")
       }else{
-        // Handle unexpected role
         console.warn("Unknown user role:", role);
-        navigate("/") // Redirect to home or another safe page
+        navigate("/")
       }
     } catch (error) {
       console.error("Login error:", error);
       
-      // Improved error handling
       if(error.response && error.response.data && error.response.data.message){
         setError(error.response.data.message)
       }else{
