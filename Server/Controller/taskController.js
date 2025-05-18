@@ -280,6 +280,7 @@ export const updateTask = async (req, res) => {
         task.dueDate = req.body.dueDate || task.dueDate;
         task.assignTo = req.body.assignTo || task.assignTo;
         task.todos = req.body.todos || task.todos;
+        task.status = req.body.status || task.status;
         task.attachments = req.body.attachments || task.attachments;
 
         if (req.body.assignTo) {
